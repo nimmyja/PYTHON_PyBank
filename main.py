@@ -14,49 +14,62 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
-    csv_path = os.path.join("PyBank","Resources","budget_data.csv")
+    csv_path = os.path.join("Resources","budget_data.csv")
     with open(csv_path,'r') as csv_file:
-        total_month = 0
+#Initializing the variables        
+        month_count = 0
         total_amount = 0
+#Change in Profit/Loss 
         total_PL_Change = 0
-        PL_Change = []
-        PL_Month = []
-        #month = col[0]
-        prev_pl=0   
-        min_pl=0
-        max_pl=0
+        prev_PL=0   
+        min_PL=0
+        max_PL=0
         min_month=0
         max_month=0
+#Stores the rows of CSV file
         csv_reader = csv.reader(csv_file,delimiter=',')
-        print(csv_reader)
+#Stores the header from read file        
         csv_header = next(csv_reader)
-        print(f"Header name : {csv_header}")
+
         for col in csv_reader:
-            total_month += 1
+            month_count += 1
             total_amount += int(col[1])
-            if total_month > 1:
-                if total_month == 2:
-                    min_pl=int(col[1])-prev_pl
-                    max_pl=int(col[1])-prev_pl
+#Create variable for changes in Profit/Losses
+            PL_Change = int(col[1])-prev_PL
+            if month_count > 1:
+                if month_count == 2:
+                    min_PL= PL_Change
+                    max_PL= PL_Change
                     min_month= col[0]
                     max_month= col[0]
                 else:
-                    if ((int(col[1])-prev_pl) > max_pl):
-                        max_pl = int(col[1])-prev_pl
+                    if (PL_Change > max_PL):
+                        max_PL = int(col[1])-prev_PL
                         max_month = col[0]
-                    elif ((int(col[1])-prev_pl) < min_pl):
-                        min_pl = int(col[1])-prev_pl
+                    elif (PL_Change < min_PL):
+                        min_PL = PL_Change
                         min_month = col[0]
-                total_PL_Change += int(col[1])-prev_pl
-            prev_pl=int(col[1])
-        mean_PL = round((total_PL_Change/(total_month-1)),2)
+                total_PL_Change += PL_Change
+            prev_PL=int(col[1])
+        mean_PL = round((total_PL_Change/(month_count-1)),2)
             
-        
-
-        print(f"Total months :{total_month}")
-        print(f"Total: {total_amount}")
+#print output to terminal        
+        print("Financial Analysis")
+        print("----------------------------")
+        print(f"Total Months :{month_count}")
+        print(f"Total: ${total_amount}")
         print(f"Average  Change: ${mean_PL}")
-        print(f"Greatest Increase in Profits: {min_month} (${min_pl})")
-        print(f"Greatest Decrease in Profits: {max_month} (${max_pl})")
+        print(f"Greatest Increase in Profits: {max_month} (${max_PL})")
+        print(f"Greatest Decrease in Profits: {min_month} (${min_PL})")
 
-        
+#write the ouput to a text file
+output_path = os.path.join("Analysis","analysis.txt")
+with open(output_path,'w',newline='') as datafile:
+    datafile.writelines("Financial Analysis")
+    datafile.writelines("\n----------------------------")
+    datafile.writelines(f"\nTotal Months :{month_count}")
+    datafile.writelines(f"\nTotal: ${total_amount}")
+    datafile.writelines(f"\nAverage  Change: ${mean_PL}")
+    datafile.writelines(f"\nGreatest Increase in Profits: {max_month} (${max_PL})")
+    datafile.writelines(f"\nGreatest Decrease in Profits: {min_month} (${min_PL})")
+
