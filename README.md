@@ -1,2 +1,2 @@
 # Python_Analysis
-Procured the financial records of a company from a CSV format file. Developed a Python script to evaluate those data and export the returned data to a text file.
+Created Python script to retrieve records from CSV format file and performed analysis on the recovered data. Developed script to print the results of analysis to the terminal and exported the output to a text file.
