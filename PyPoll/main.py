@@ -1,21 +1,15 @@
-# This is a sample Python script.
+# Import Modules
 import os
 import csv
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'{name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'{name}')  
 
 
 def print_line():
     print("-------------------------")
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('Election results')
     print_line()
@@ -49,6 +43,25 @@ if __name__ == '__main__':
         print_line()                      
         print(f"Winner : {cand_won}")
         print_line()
+
+output_path = os.path.join("Analysis","output.txt")
+with open(output_path,'w',newline='') as writer:
+    writer.writelines("Election results")
+    writer.writelines("\n----------------------------")
+    writer.writelines(f"\nTotal Votes : {total_votes}")
+    writer.writelines("\n----------------------------")
+    for candidate in unique_items:
+        cand_votes = cand_arr.count(candidate)            
+        cand_percent ="{:.3%}".format(cand_votes/total_votes)
+        writer.writelines(f"\n{candidate} : {cand_percent} ({str(cand_votes)})")
+    writer.writelines("\n----------------------------")                      
+    writer.writelines(f"\nWinner : {cand_won}")
+    writer.writelines("\n----------------------------")
+    
+
+
+
+
         
                 
                 
