@@ -1,0 +1,2 @@
+# PyPoll
+Developed Python script to read the records of an election poll from CSV format file. Performed analyses on the data and found the winner of the election. The result of the election was printed and exported to a text file.
