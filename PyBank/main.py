@@ -8,12 +8,12 @@ import csv
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'{name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print_hi("Financial Analysis")
     csv_path = os.path.join("Resources","budget_data.csv")
     with open(csv_path,'r') as csv_file:
 #Initializing the variables        
@@ -54,7 +54,7 @@ if __name__ == '__main__':
         mean_PL = round((total_PL_Change/(month_count-1)),2)
             
 #print output to terminal        
-        print("Financial Analysis")
+        
         print("----------------------------")
         print(f"Total Months :{month_count}")
         print(f"Total: ${total_amount}")
