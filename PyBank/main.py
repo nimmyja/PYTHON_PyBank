@@ -65,7 +65,7 @@ if __name__ == '__main__':
         print(f"Greatest Decrease in Profits: {min_month} (${min_PL})")
 
 #write the ouput to a text file
-output_path = os.path.join("Analysis","ouput.txt")
+output_path = os.path.join("Analysis","output.txt")
 with open(output_path,'w',newline='') as datafile:
     datafile.writelines("Financial Analysis")
     datafile.writelines("\n----------------------------")
