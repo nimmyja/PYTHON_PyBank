@@ -8,18 +8,21 @@ import csv
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'{name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+def print_line():
+    print("----------------------------")
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print_hi("Financial Analysis")
     csv_path = os.path.join("Resources","budget_data.csv")
     with open(csv_path,'r') as csv_file:
-#Initializing the variables        
+#Initialize required variables        
         month_count = 0
         total_amount = 0
-#Change in Profit/Loss 
+#Initialize variables to store Change in Profit/Loss 
         total_PL_Change = 0
         prev_PL=0   
         min_PL=0
@@ -53,9 +56,8 @@ if __name__ == '__main__':
             prev_PL=int(col[1])
         mean_PL = round((total_PL_Change/(month_count-1)),2)
             
-#print output to terminal        
-        print("Financial Analysis")
-        print("----------------------------")
+#print output to terminal                
+        print_line()
         print(f"Total Months :{month_count}")
         print(f"Total: ${total_amount}")
         print(f"Average  Change: ${mean_PL}")
@@ -63,7 +65,7 @@ if __name__ == '__main__':
         print(f"Greatest Decrease in Profits: {min_month} (${min_PL})")
 
 #write the ouput to a text file
-output_path = os.path.join("Analysis","analysis.txt")
+output_path = os.path.join("Analysis","ouput.txt")
 with open(output_path,'w',newline='') as datafile:
     datafile.writelines("Financial Analysis")
     datafile.writelines("\n----------------------------")
