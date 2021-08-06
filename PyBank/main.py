@@ -1,44 +1,41 @@
-# This is a sample Python script.
 import os
 import csv
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
+#module to print the name of the analysis
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'{name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'{name}')
 
+#module to print the name of the analysis
 def print_line():
     print("----------------------------")
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi("Financial Analysis")
     csv_path = os.path.join("Resources","budget_data.csv")
     with open(csv_path,'r') as csv_file:
-#Initialize required variables        
+
+        #Initialize required variables        
         month_count = 0
         total_amount = 0
-#Initialize variables to store Change in Profit/Loss 
         total_PL_Change = 0
         prev_PL=0   
         min_PL=0
         max_PL=0
         min_month=0
         max_month=0
-#Stores the rows of CSV file
+
+        #Stores the rows of CSV file
         csv_reader = csv.reader(csv_file,delimiter=',')
-#Stores the header from read file        
+        #Skip the header row        
         csv_header = next(csv_reader)
 
         for col in csv_reader:
             month_count += 1
             total_amount += int(col[1])
-#Create variable for changes in Profit/Losses
+        #Variable to store changes in Profit/Losses
             PL_Change = int(col[1])-prev_PL
+        #Calculating the changes in Profit/Losses    
             if month_count > 1:
                 if month_count == 2:
                     min_PL= PL_Change
@@ -56,7 +53,7 @@ if __name__ == '__main__':
             prev_PL=int(col[1])
         mean_PL = round((total_PL_Change/(month_count-1)),2)
             
-#print output to terminal                
+        #print output to terminal                
         print_line()
         print(f"Total Months :{month_count}")
         print(f"Total: ${total_amount}")
